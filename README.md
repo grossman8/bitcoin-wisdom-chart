@@ -2,7 +2,7 @@
 
 Open source rebuild of BitcoinWisdom.com charts.  
 
-Why? You may be asking... because they're the simpliest and best crypto charts.
+Why? You might be asking... because they're the simpliest and best crypto charts.
 
 
 
