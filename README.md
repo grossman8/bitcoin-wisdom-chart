@@ -30,5 +30,13 @@ $ npm run dev
 ```
 
 
+## Stack
+- Svelte
+- Rollup
+- SocketIO
+- Fetch
+- Lodash-ES
+
+
 
 MIT License, have fun!
