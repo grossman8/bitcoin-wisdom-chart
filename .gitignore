@@ -1,0 +1,5 @@
+/node_modules/
+/public/build/
+/src/lib/config.js
+.vscode
+.DS_Store

@@ -1,0 +1,546 @@
+html, body {
+	position: relative;
+	width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
+body {
+	color: #333;
+	margin: 0;
+	padding: 8px;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+a {
+	color: rgb(0,100,200);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:visited {
+	color: rgb(0,80,160);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+label {
+	display: block;
+}
+
+li, ul {
+  padding:0;
+  margin: 0;
+}
+
+input, button, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	padding: 0.4em;
+	margin: 0 0 0.5em 0;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+
+input:disabled {
+	color: #ccc;
+}
+
+input[type="range"] {
+	height: 0;
+}
+
+button {
+	color: #333;
+	background-color: #f4f4f4;
+	outline: none;
+}
+
+button:disabled {
+	color: #999;
+}
+
+button:not(:disabled):active {
+	background-color: #ddd;
+}
+
+button:focus {
+	border-color: #666;
+}
+
+#orderbook {
+  text-align: center;
+  border: solid 1px red;
+}
+
+
+
+.orderbook {
+  width: 100%;
+  height: 100%;
+  display: grid;
+}
+.orderbook > * {
+  font-family: monospace;
+}
+
+.orderbook .last_trade{
+  border-left: solid 1px #444;
+  border-right: solid 1px #444;
+}
+
+.asks, .bids {
+  overflow: hidden;
+  border: solid #444 1px;
+  overflow-y: scroll;
+}
+/* .asks > div, .bids > div {
+  height: 100%;
+} */
+.asks {
+  border-bottom: none;
+}
+.bids {
+  border-top: none;
+}
+.asks li, .bids li {
+  transition: max-height 770ms cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  max-height: 22px;
+  display: block;
+  overflow: hidden;
+}
+li td:last-child {
+  text-align: left;
+}
+.orderbook li {
+  text-align: left;
+  transition: background-color 900ms ease;
+}
+
+/* .orderbook li span.c {
+  transition: color 400ms cubic-bezier(0.95, 0.05, 0.795, 0.035);
+} */
+li .v {
+  padding-left: 12px;
+}
+li.new .v > .c, li.new .p > .c {
+  color: lime;
+  background-color: #222;
+}
+li.new .v > .d, li.updated .v > .d {
+  color: #555;
+}
+
+li.updated .v > .c {
+  color: lime;
+}
+li.removed {
+  background-color: #000;
+}
+li.removed .p > *, li.removed .v > *, li.removed .d, li.removed .c {
+  color: #333;
+}
+
+.last_trade .buy {
+  color: lime;
+}
+.last_trade .sell {
+  color: red;
+}
+
+li.filled.buy {
+  background-color: crimson;
+}
+li.filled.sell {
+  background-color: lime;
+}
+.timesales > * {
+  font-family: monospace;
+}
+.timesales .buy .p {
+  color: lime;
+}
+.timesales .sell .p {
+  color: red;
+}
+.timesales .trade {
+  transition: background-color 500ms linear;
+}
+.timesales .new {
+  background-color: #222;
+}
+.timesales {
+  display: grid;
+  border: solid 1px #333;
+  font-size: 12px;
+}
+.timesales > table {
+  width: 100%;
+}
+.timesales > table td:nth-child(1), .timesales > table td:nth-child(2) {
+  text-align: left;
+}
+.timesales > table td:nth-child(3) {
+  text-align: right;
+}
+
+.number {
+  font-family: monospace;
+}
+.number > .c, .amount > .c {
+  color: #ccc;
+  margin-right: 0;
+  padding-right: 0;
+}
+.number > .d {
+  color: #444;
+  padding-left: 0;
+  margin-left: -7px;
+}
+
+.price.buy > *{
+  color: lime;
+}
+
+.price.sell > * {
+  color: red;
+}
+
+.mode-timeline .trade {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding-left: 2px;
+  height: 3px;
+}
+
+.mode-timeline .trade > span {
+  display: inline-block;
+  height: 2px;
+}
+
+.mode-timeline .trade.sell > span.v {
+  background-color: red;
+}
+
+.mode-timeline .trade.buy > span.v {
+  background-color: lime;
+}
+.mode-timeline .trade > span.k {
+  display: none;
+}
+.mode-timeline .trade:hover, .mode-timeline .trade:hover > span {
+  max-height: 10px;
+  line-height: 10px;
+  height: 10px;
+  background-color: #222;
+}
+.mode-timeline .trade:hover > span.k {
+  display: inline;
+  color: #ccc;
+  float: right;
+  padding-right: 14px;
+}
+
+.timesales-wrap {
+  border-top: solid 1px #333;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+
+.mode-group .group {
+  padding-left: 2px;
+  display: table;
+}
+
+.mode-group .group > span {
+  display: table-cell;
+  height: 6px;
+}
+
+.mode-group .group-wrap:first-child, .mode-group .group-wrap:first-child > * {
+  height: 5px;
+}
+.mode-group .group-wrap:first-child .group > span {
+  transition: width 500ms linear;
+}
+
+.mode-group .group-wrap {
+  padding: 1px 0;
+}
+.mode-group .group .v {
+  height: 2px;
+}
+
+.mode-group .group .v.buy {
+  background-color: lime;
+}
+
+.mode-group .group .v.sell {
+  background-color: red;
+}
+
+.mode-group .group-wrap span.k {
+  display: none;
+}
+.mode-group .group-wrap:hover, .mode-group .group-wrap:hover .group > span {
+  max-height: 10px;
+  line-height: 10px;
+  height: 10px;
+}
+.mode-group .group-wrap:hover span.k {
+  display: inline-block;
+  color: #ccc;
+  padding-right: 14px;
+  background-color: #111;
+  position: absolute;
+  right: 30%;
+}
+
+.mode-text > div {
+  text-align: left;
+  display: table;
+  height: inherit;
+  width: 100%;
+}
+
+.mode-text .trade {
+  display: table-row;
+}
+
+.mode-text .trade > span {
+  height: 10px;
+  line-height: 10px;
+  display: table-cell;
+  padding: 2px;
+}
+
+.mode-text .trade_amount .c {
+  color: #ccc;
+}
+
+.mode-text .trade .trade_amount {
+  text-align: right;
+  padding-right: 4px;
+}
+.mode-text .trade.buy .trade_price {
+  color: lime;
+}
+.mode-text .trade.sell .trade_price {
+  color: red;
+}
+
+
+.settings {
+  margin-top: 2px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 12px;
+}
+
+.settings input{
+  border: 1px solid #444;
+  border-radius: 2px;
+  background-color: #000;
+  color: #ddd;
+  text-align: center;
+  width: 32px;
+  height: 16px;
+  font-size: 0.8em;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.settings span {
+  color: #777;
+}
+.settings-wrap, .settings-wrap > div {
+  display: inline;
+}
+
+.settings .toggle-next {
+  float: right;
+  cursor: pointer;
+}
+.settings .toggle-prev {
+  float: left;
+  cursor: pointer;
+}
+
+
+/* The emerging W3C standard
+  that is currently Firefox-only */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #333;
+}
+
+/* Works on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: #000;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #777;
+  border-radius: 20px;
+  border: 1px solid #444;
+}
+
+.orderbook.single .offer {
+  height: 4px;
+  width: 100%;
+  text-align: left;
+  /* transition: background-color 500ms linear; */
+}
+.orderbook.single .offer .v{
+  height: 2px;
+  display: inline-block;
+  background-color: lime;
+  transition: width 200ms linear;
+}
+.orderbook.single .offer .m{
+  height: 2px;
+  display: inline-block;
+  background-color: #222;
+  margin-left: -5px;
+  transition: width 1200ms linear;
+}
+
+.orderbook.single .k {
+  display: none;
+}
+
+.orderbook.single .offer:hover {
+  max-height: 10px;
+  line-height: 10px;
+  height: 10px;
+  background-color: #222;
+}
+
+.orderbook.single .offer:hover .v{
+  max-height: 10px;
+  line-height: 10px;
+  height: 10px;
+}
+
+.orderbook.single .offer:hover  .k {
+  display: inline;
+  color: #ccc;
+  float: right;
+  padding-right: 14px;
+  background-color: #000;
+}
+
+
+.orderbook.group .offer {
+  height: 4px;
+  width: 100%;
+  text-align: left;
+}
+.orderbook.group .offer .v{
+  height: 2px;
+  display: inline-block;
+  background-color: lime;
+  /* transition: width 300ms linear; */
+}
+.orderbook.group .offer .m{
+  height: 2px;
+  display: inline-block;
+  background-color: #222;
+  margin-left: -5px;
+  /* transition: width 200ms linear; */
+}
+
+.orderbook.group .k {
+  display: none;
+}
+
+.orderbook.group .offer:hover {
+  max-height: 10px;
+  line-height: 10px;
+  height: 10px;
+  background-color: #222;
+}
+
+.orderbook.group .offer:hover .v{
+  max-height: 10px;
+  line-height: 10px;
+  height: 10px;
+}
+
+.orderbook.group .offer:hover  .k {
+  display: inline;
+  color: #ccc;
+  float: right;
+  padding-right: 14px;
+  background-color: #000;
+}
+
+.orderbook .last_trade  .last{
+  font-size: 18px;
+}
+
+
+.sidebar {
+  height: 800px;
+  width: 250px;
+  /* border: solid 2px red;
+  padding: 10px; */
+}
+
+.sidebar .orderbook {
+  height: 60%;
+}
+
+.sidebar .timesales{
+  height: 40%;
+}
+
+
+canvas {
+  border: solid 1px #111;
+  /* transform: rotateY(180deg); */
+}
+
+a .active {
+  font-weight: bold;
+}
+
+.canvas-plot {
+  border: solid 1px #555;
+  background-color: #000;
+}
+
+.canvas-drawings {
+  position: absolute;
+  left: 9px;
+  border: solid 1px red;
+  pointer-events: none;
+}
+
+
+#scatter-container {
+  border: solid 1px green;
+  height: calc(100% - 3em);
+  width: 100%;
+}
+
+.select-one .active{
+  font-weight: bold;
+  color: blue
+}
+
+.select-one span {
+  padding: 0 2px;
+  cursor: pointer;
+}
